@@ -3,32 +3,38 @@ import pygame
 
 class Display:
 
-    def __init__(self, window,  character_pos, object_list):
+    def __init__(self, window,  character_pos, object_list, icon):
         self.window = window
         self.character_pos = character_pos
         self.time = 0
         self.IMAGES = {}
         self.object_list = object_list
-        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60, 60, 50]
+        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60, 60, 50, 50, 50]
         self.character_in_radius = 0
+        self.icon = icon
 
-    def get_object_list(self, list):
+    def update_variables(self, list, clock, in_rad):
         self.object_list = list
-
-    def get_time(self, clock):
         self.time = clock
-
-    def get_character_in_rad(self, in_rad):
         self.character_in_radius = in_rad
+
+    def icon_checked(self, pos):
+        if 2 < pos[0] < 37 and 275 < pos[1] < 310:
+            self.icon = 1
+        else:
+            self.icon = 0
+
+    def get_icon(self):
+        return self.icon
 
 
 
     def load_images(self):
         image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn',
                       'spritelog', 'Lumberjack', 'charecter', 'log_index',
-                      'matchbox_icon', 'matchbox']
+                      'matchbox_icon', 'matchbox', 'bondfire_icon', 'bondfire_icon_checked']
         image_size =  self.object_size
-        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1]
+        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1]
         for index, p in enumerate(image_list):
             for i in range(0, index_list[index]):
                 self.IMAGES[p + str(i)] = pygame.transform.scale(
@@ -38,6 +44,7 @@ class Display:
     def update(self):
         depth = sorted(self.object_list, key=lambda x: int(x[1]))
         draw_character = 0
+        print(self.icon)
         for i in depth:
             if i[3] == 1:
                 if i[1] > self.character_pos[1] and draw_character == 0 and self.character_in_radius == 1:
@@ -70,6 +77,12 @@ class Display:
 
         self.draw_sprite(self.object_size[7], 2, 2, 'log_index', 150, 25)
         self.draw_sprite(self.object_size[8], 2, 2, 'matchbox_icon', 210, 20)
+        if self.icon == 0:
+            self.draw_sprite(self.object_size[9], 2, 2, 'bondfire_icon', 20, 300)
+        elif self.icon == 1:
+            self.draw_sprite(self.object_size[10], 2, 2, 'bondfire_icon_checked', 20, 300)
+        #pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 275, 35, 35), 2)
+
 
     def draw_sprite(self, object_size, x_div, y_div, spritename, pos_x, pos_y, mod = 1, speed = 1):
         self.window.blit(self.IMAGES[spritename + str(int(speed*self.time[1] % mod))], (

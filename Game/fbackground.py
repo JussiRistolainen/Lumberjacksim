@@ -9,7 +9,7 @@ class Background:
         self.Darkness = (115, 118, 83)
         self.ground = (20, 20, 0)
         self.alpha_value = 200
-        self.value = 20
+        self.value = 100
 
     def draw_circle_alpha(self, surface, value, radius, position):
         target_rect = pygame.Rect(position, (0, 0)).inflate((radius * 2, radius * 2))
@@ -41,6 +41,6 @@ class Background:
 
         for i in object_list:
             if i[2] == 'fire':
-                self.make_flame_background(i[5], i[6], i[0], i[1])
+                #self.make_flame_background(i[5], i[6], i[0], i[1])
                 self.make_flame(self.window, i[5], i[6], i[0], i[1])
 

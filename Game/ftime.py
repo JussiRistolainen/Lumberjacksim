@@ -90,3 +90,13 @@ class Timecount:
             if i[2] == 'Matches':
                 self.matches += 5
 
+    def craft_flame(self):
+        self.logs -= 3
+        self.matches -= 1
+
+    def get_wood(self):
+        return self.logs
+
+    def get_matches(self):
+        return self.matches
+

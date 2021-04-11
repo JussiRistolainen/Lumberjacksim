@@ -16,7 +16,7 @@ def main():
     window = pygame.display.set_mode((res_w, res_h))
     running = True
     FPS = 30
-    block = 30
+    icon = 0
 
     #Item list
     object_list = []
@@ -26,7 +26,7 @@ def main():
     time_count = Timecount(window, 0, 0, 0, 1)
     background = Background(window, character.get_character_position())
     items = Items(window, res_w, res_h)
-    display_refresh = Display(window, character.get_character_position(), object_list)
+    display_refresh = Display(window, character.get_character_position(), object_list, icon)
     flame = Flame(window, 100, 30)
 
 
@@ -41,7 +41,7 @@ def main():
     display_refresh.load_images()
 
     #start creation
-    items.create_new_item(3, object_list, 'Log')
+    items.create_new_item(5, object_list, 'Log')
     items.create_new_item(1, object_list, 'Matches')
     flame.create_flame(object_list, 640, 360, 0, 3)
 
@@ -73,21 +73,21 @@ def main():
             click = pygame.mouse.get_pressed()
             if click[0] == 1 and mouse:
                 time_count.update_items(items.lift_item(object_list, pos))
+                if display_refresh.get_icon() == 1 and time_count.get_wood() >= 3 and time_count.get_matches() >= 1:
+                    flame.craft_flame(pos, icon, object_list)
+                    time_count.craft_flame()
+                display_refresh.icon_checked(pos)
                 mouse = 0
 
             if event.type == CLOCKTICKFLAME:
                 time_count.update_time()
                 flame.update_time(object_list)
                 flame.items_in_radius(object_list)
-                display_refresh.get_object_list(object_list)
-                display_refresh.get_character_in_rad(
-                flame.character_in_radius(character.get_character_position(), object_list))
-                display_refresh.get_time(time_count.get_time())
+                display_refresh.update_variables(object_list, time_count.get_time(), flame.character_in_radius(character.get_character_position(), object_list))
                 background.update(object_list)
                 display_refresh.update()
                 time_count.update_overlay()
                 pygame.display.flip()
-
 
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse = 1

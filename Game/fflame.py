@@ -14,6 +14,9 @@ class Flame:
         object_list.append([pos_x, pos_y, 'fire', 0, [0, 0, 0, 0], time, size])
 
 
+    def craft_flame(self, pos, icon, object_list):
+        object_list.append([pos[0], pos[1], 'fire', 0, [0, 0, 0, 0], 0, 3])
+
     def items_in_radius(self, object_list):
         flames = []
         for i in object_list:
