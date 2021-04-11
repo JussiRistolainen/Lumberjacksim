@@ -43,4 +43,6 @@ class Background:
             if i[2] == 'fire':
                 #self.make_flame_background(i[5], i[6], i[0], i[1])
                 self.make_flame(self.window, i[5], i[6], i[0], i[1])
+            if i[2] == 'torch':
+                self.make_flame(self.window, i[5], i[6], self.character_pos[0], self.character_pos[1])
 

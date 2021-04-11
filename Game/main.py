@@ -29,7 +29,6 @@ def main():
     display_refresh = Display(window, character.get_character_position(), object_list, icon)
     flame = Flame(window, 100, 30)
 
-
     #GameClock
     Clock = pygame.time.Clock()
     CLOCKTICKFLAME = pygame.USEREVENT + 1
@@ -41,7 +40,7 @@ def main():
     display_refresh.load_images()
 
     #start creation
-    items.create_new_item(5, object_list, 'Log')
+    items.create_new_item(30, object_list, 'Log')
     items.create_new_item(1, object_list, 'Matches')
     flame.create_flame(object_list, 540, 360, 0, 3)
 
@@ -74,12 +73,18 @@ def main():
             if click[0] == 1 and mouse:
                 time_count.update_items(items.lift_item(object_list, pos))
                 if display_refresh.get_icon() == 1 and time_count.get_wood() >= 3 and time_count.get_matches() >= 1:
-                    flame.craft_flame(pos, icon, object_list)
+                    flame.craft_flame(pos, object_list)
                     time_count.craft_flame()
+
+                if display_refresh.get_icon() == 2 and time_count.get_wood() >= 1 and time_count.get_matches() >= 1:
+                    flame.craft_torch(object_list)
+                    time_count.craft_torch()
+
                 display_refresh.icon_checked(pos)
                 mouse = 0
 
             if event.type == CLOCKTICKFLAME:
+                display_refresh.update_torch(object_list)
                 time_count.update_time()
                 flame.update_time(object_list)
                 flame.items_in_radius(object_list)
@@ -93,7 +98,7 @@ def main():
                 mouse = 1
 
 
-        print(object_list)
+
 
 
 

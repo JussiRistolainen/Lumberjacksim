@@ -94,6 +94,10 @@ class Timecount:
         self.logs -= 3
         self.matches -= 1
 
+    def craft_torch(self):
+        self.logs -= 1
+        self.matches -= 1
+
     def get_wood(self):
         return self.logs
 

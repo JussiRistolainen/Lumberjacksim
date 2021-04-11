@@ -9,7 +9,7 @@ class Display:
         self.time = 0
         self.IMAGES = {}
         self.object_list = object_list
-        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60, 60, 50, 50, 50]
+        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60, 60, 50, 50, 50, 150, 40, 40]
         self.character_in_radius = 0
         self.icon = icon
 
@@ -21,8 +21,18 @@ class Display:
     def icon_checked(self, pos):
         if 2 < pos[0] < 37 and 275 < pos[1] < 310:
             self.icon = 1
+        elif 2 < pos[0] < 37 and 320 < pos[1] < 355:
+            self.icon = 2
         else:
             self.icon = 0
+
+    def update_torch(self, object_list):
+        for i in object_list:
+            if i[2] == 'torch':
+                i[0] = self.character_pos[0]
+                i[1] = self.character_pos[1]
+
+
 
     def get_icon(self):
         return self.icon
@@ -32,9 +42,9 @@ class Display:
     def load_images(self):
         image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn',
                       'spritelog', 'Lumberjack', 'charecter', 'log_index',
-                      'matchbox_icon', 'matchbox', 'bondfire_icon', 'bondfire_icon_checked']
+                      'matchbox_icon', 'matchbox', 'bondfire_icon', 'bondfire_icon_checked','Lumberjack_fire', 'torch', 'torch_checked']
         image_size =  self.object_size
-        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1]
+        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1, 3, 1, 1]
         for index, p in enumerate(image_list):
             for i in range(0, index_list[index]):
                 self.IMAGES[p + str(i)] = pygame.transform.scale(
@@ -44,13 +54,21 @@ class Display:
     def update(self):
         depth = sorted(self.object_list, key=lambda x: int(x[1]))
         draw_character = 0
+        torch = 0
+        for k in depth:
+            if k[2] == 'torch':
+                torch = 1
+
         for i in depth:
             if i[3] == 1:
-                if i[1] > self.character_pos[1] and draw_character == 0 and self.character_in_radius == 1:
+                if i[1] > self.character_pos[1] and draw_character == 0 and self.character_in_radius == 1 and torch == 0:
                     draw_character = 1
                     self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0]-46, self.character_pos[1]-75, 2)
                     #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0]-27, self.character_pos[1]-95,55, 100), 2)
-                    #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0], self.character_pos[1], 2, 2), 2)
+                    pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0], self.character_pos[1], 2, 2), 2)
+                if i[1] > self.character_pos[1] and draw_character == 0 and torch == 1:
+                    draw_character = 1
+                    self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack_fire', self.character_pos[0] - 24, self.character_pos[1] - 50, 3)
                 if i[2] == 'Log':
                     self.draw_sprite(self.object_size[4], 2, 2, 'spritelog', i[0], i[1])
                     #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(i[0]-35, i[1]-15, 67, 25), 2)
@@ -68,19 +86,27 @@ class Display:
                     elif i[6] == 1 and (i[5] < 57 or  57.5 < i[5] < 58.5 or 59 < i[5] < 95.5):
                         self.draw_sprite(self.object_size[0], 2, 2, 'logburn', i[0], i[1], 3, 5)
 
-        if draw_character == 0 and self.character_in_radius == 1:
+        if draw_character == 0 and self.character_in_radius == 1 and torch == 0:
             self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0]-46, self.character_pos[1]-75, 2)
             #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0]-27, self.character_pos[1]-95,55, 100), 2)
             #self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0] - 46,self.character_pos[1] - 75, 2)
             draw_character = 1
+        if draw_character == 0 and torch == 1:
+            draw_character = 1
+            self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack_fire', self.character_pos[0] - 24, self.character_pos[1] - 50, 3)
 
         self.draw_sprite(self.object_size[7], 2, 2, 'log_index', 150, 25)
         self.draw_sprite(self.object_size[8], 2, 2, 'matchbox_icon', 210, 20)
-        if self.icon == 0:
+        if self.icon != 1:
             self.draw_sprite(self.object_size[9], 2, 2, 'bondfire_icon', 20, 300)
         elif self.icon == 1:
             self.draw_sprite(self.object_size[10], 2, 2, 'bondfire_icon_checked', 20, 300)
-        #pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 275, 35, 35), 2)
+        if self.icon != 2:
+            self.draw_sprite(self.object_size[13], 2, 2, 'torch', 20, 337)
+        elif self.icon == 2:
+            self.draw_sprite(self.object_size[14], 2, 2, 'torch_checked', 20, 337)
+        # pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 275, 35, 35), 2)
+        # pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 320, 35, 35), 2)
 
 
     def draw_sprite(self, object_size, x_div, y_div, spritename, pos_x, pos_y, mod = 1, speed = 1):
