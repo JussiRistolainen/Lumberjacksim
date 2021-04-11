@@ -10,12 +10,17 @@ class Display:
         self.IMAGES = {}
         self.object_list = object_list
         self.object_size = [100, 100, 100, 100, 100, 200, 200, 60]
+        self.character_in_radius = 0
 
     def get_object_list(self, list):
         self.object_list = list
 
     def get_time(self, clock):
         self.time = clock
+
+    def get_character_in_rad(self, in_rad):
+        self.character_in_radius = in_rad
+
 
 
     def load_images(self):
@@ -33,9 +38,11 @@ class Display:
         draw_character = 0
         for i in depth:
             if i[3] == 1:
-                if i[1] > self.character_pos[1] and draw_character == 0:
+                if i[1] > self.character_pos[1] and draw_character == 0 and self.character_in_radius == 1:
                     draw_character = 1
-                    self.draw_sprite(self.object_size[2], 2, 1.7, 'Lumberjack', self.character_pos[0],self.character_pos[1], 2)
+                    self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0]-46, self.character_pos[1]-75, 2)
+                    #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0]-27, self.character_pos[1]-95,55, 100), 2)
+                    #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0], self.character_pos[1], 2, 2), 2)
                 if i[2] == 'Log':
                     self.draw_sprite(self.object_size[4], 2, 2, 'spritelog', i[0], i[1])
                     #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(i[0]-35, i[1]-15, 67, 25), 2)
@@ -50,8 +57,10 @@ class Display:
                     else:
                         self.draw_sprite(self.object_size[0], 2, 2, 'logburn', i[0], i[1], 3, 5)
 
-        if draw_character == 0:
-            self.draw_sprite(self.object_size[2], 2, 1.7, 'Lumberjack', self.character_pos[0], self.character_pos[1], 2)
+        if draw_character == 0 and self.character_in_radius == 1:
+            self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0]-46, self.character_pos[1]-75, 2)
+            #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0]-27, self.character_pos[1]-95,55, 100), 2)
+            #self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0] - 46,self.character_pos[1] - 75, 2)
             draw_character = 1
 
         self.draw_sprite(self.object_size[7], 2, 2, 'log_index', 150, 25)

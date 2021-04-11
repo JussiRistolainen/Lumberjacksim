@@ -79,12 +79,14 @@ def main():
                 flame.update_time(object_list)
                 flame.items_in_radius(object_list)
                 display_refresh.get_object_list(object_list)
+                display_refresh.get_character_in_rad(
+                flame.character_in_radius(character.get_character_position(), object_list))
                 display_refresh.get_time(time_count.get_time())
                 background.update(object_list)
                 display_refresh.update()
                 time_count.update_overlay()
                 pygame.display.flip()
-                print(object_list)
+
 
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse = 1

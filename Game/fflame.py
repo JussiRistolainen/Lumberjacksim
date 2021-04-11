@@ -22,9 +22,22 @@ class Flame:
                 flames.append(i)
         for i in flames:
             for index, p in enumerate(object_list):
-                distance = 5+math.sqrt(math.pow(p[0]-i[0], 2) + math.pow(p[1]-i[1], 2))
+                distance = 5 + math.sqrt(math.pow(p[0] - i[0], 2) + math.pow(p[1] - i[1], 2))
                 if distance < 500-i[5] * 1.2:
                     p[3] = 1
+
+    def character_in_radius(self, pos, object_list):
+        flames = []
+        is_in_radius = 0
+        for i in object_list:
+            if i[2] == 'fire':
+                flames.append(i)
+        for p in flames:
+            distance = math.sqrt(math.pow(p[0] - pos[0], 2) + math.pow(p[1] - pos[1], 2))
+            if distance < 500 - i[5] * 1.2:
+                is_in_radius = 1
+        print(is_in_radius)
+        return is_in_radius
 
 
     def update_time(self, object_list):
