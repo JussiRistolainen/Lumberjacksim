@@ -28,9 +28,14 @@ class Flame:
 
 
     def update_time(self, object_list):
-        for i in object_list:
+        del_fire = []
+        for index, i in enumerate(object_list):
             if i[2] == 'fire':
                 i[5] += 0.1
+                if i[5] > 300:
+                    del_fire.append(index)
+        for i in del_fire:
+            object_list.pop(i)
 
 
 

@@ -9,7 +9,7 @@ class Display:
         self.time = 0
         self.IMAGES = {}
         self.object_list = object_list
-        self.object_size = [200, 200, 200, 200, 100, 200, 200]
+        self.object_size = [100, 100, 100, 100, 100, 200, 200]
 
     def get_object_list(self, list):
         self.object_list = list
@@ -42,11 +42,11 @@ class Display:
                 if i[2] == 'fire':
                     if i[5] * 5 < 13:
                         self.draw_sprite(self.object_size[0], 2, 2, 'sprite_', i[0], i[1], 13, 5)
-                    elif i[5]*5 > 13:
+                    elif i[5] < 70:
                         self.draw_sprite(self.object_size[1], 2, 2, 'sprite2_', i[0], i[1], 4, 5)
 
-                    elif i[5] > 120:
-                        self.draw_sprite(self.object_size[2], 2, 2, 'sprite_', i[0], i[1], 4, 5)
+                    elif i[5] < 120:
+                        self.draw_sprite(self.object_size[2], 2, 2, 'sprite22_', i[0], i[1], 4, 5)
                     else:
                         self.draw_sprite(self.object_size[0], 2, 2, 'logburn', i[0], i[1], 3, 5)
 

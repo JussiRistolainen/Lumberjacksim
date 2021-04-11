@@ -68,6 +68,12 @@ def main():
 
             character.update_character_pos(character.speed(x_force, y_force, 10))
 
+            pos = pygame.mouse.get_pos()
+            click = pygame.mouse.get_pressed()
+            if click[0] == 1 and mouse:
+                time_count.update_items(items.lift_item(object_list, pos))
+                mouse = 0
+
             if event.type == CLOCKTICKFLAME:
                 time_count.update_time()
                 flame.update_time(object_list)
@@ -83,12 +89,6 @@ def main():
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse = 1
 
-            pos = pygame.mouse.get_pos()
-            click = pygame.mouse.get_pressed()
-            if click[0] == 1 and mouse:
-                items.lift_item(object_list, pos)
-
-                mouse = 0
 
 
 

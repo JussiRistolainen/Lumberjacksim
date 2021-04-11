@@ -10,6 +10,7 @@ class Timecount:
         self.Hour = Hour
         self.Day = Day
         self.Mil = 0
+        self.logs = 0
         self.Black = (150, 150, 150)
         self.Darkness = (115, 118, 83)
 
@@ -49,6 +50,11 @@ class Timecount:
         self.SecondFontR = SecondFont.get_rect()
         self.SecondFontR.center = (1200, 20)
 
+        logFont = self.Font.render("Log:{0}".format(self.logs), 1,
+                                      self.Black)
+        self.logFontR = logFont.get_rect()
+        self.logFontR.center = (200, 20)
+
 
 
     def update_overlay(self):
@@ -60,7 +66,16 @@ class Timecount:
         self.window.blit(HourFont, self.HourFontR)
         DayFont = self.Font.render("Day:{0:01}".format(self.Day), 1, self.Black)
         self.window.blit(DayFont, self.DayFontR)
+        logFont = self.Font.render("Log:{0:01}".format(self.logs), 1, self.Black)
+        self.window.blit(logFont, self.logFontR)
 
 
     def get_time(self):
         return [self.Mil, self.Second, self.Minute]
+
+
+    def update_items(self, picked_up_items):
+        for i in picked_up_items:
+            if i[2] == 'Log':
+                self.logs += 1
+

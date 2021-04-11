@@ -20,12 +20,15 @@ class Items:
 
     def lift_item(self, object_list, position):
         del_list = []
+        del_item = []
         for index, i in enumerate(object_list):
-            if i[4][0] < position[0] < i[4][2] and i[4][1] < position[1] < i[4][3]:
+            if i[4][0] < position[0] < i[4][2] and i[4][1] < position[1] < i[4][3] and i[3] == 1:
                 del_list.append(index)
+                del_item.append(i)
 
         for i in del_list:
             object_list.pop(i)
+        return del_item
 
 
 
