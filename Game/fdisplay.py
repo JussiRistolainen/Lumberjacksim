@@ -52,14 +52,14 @@ class Display:
                     self.draw_sprite(self.object_size[4], 2, 2, 'matchbox', i[0], i[1])
                     #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(i[0]-35, i[1]-33, 28, 20), 2)
                 if i[2] == 'fire':
-                    if i[5] * 5 < 13:
+                    if i[5] * 5 < 13 and i[6] == 3:
                         self.draw_sprite(self.object_size[0], 2, 2, 'sprite_', i[0], i[1], 13, 5)
-                    elif i[5] < 70:
+                    elif i[6] == 3:
                         self.draw_sprite(self.object_size[1], 2, 2, 'sprite2_', i[0], i[1], 4, 5)
 
-                    elif i[5] < 120:
+                    elif i[6] == 2:
                         self.draw_sprite(self.object_size[2], 2, 2, 'sprite22_', i[0], i[1], 4, 5)
-                    else:
+                    elif i[6] == 1 and (i[5] < 57 or  57.5 < i[5] < 58.5 or 59 < i[5] < 95.5):
                         self.draw_sprite(self.object_size[0], 2, 2, 'logburn', i[0], i[1], 3, 5)
 
         if draw_character == 0 and self.character_in_radius == 1:

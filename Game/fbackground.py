@@ -17,14 +17,14 @@ class Background:
         pygame.draw.circle(shape_surf, (value, 0, 0, 50), (radius, radius), radius)
         surface.blit(shape_surf, target_rect)
 
-    def make_flame_background(self, time, position_x, position_y):
-        radius = 500-time*1.2
+    def make_flame_background(self, time, size, position_x, position_y):
+        radius = size * 150 - time * 1.2
         position = (position_x, position_y)
         pygame.draw.circle(self.window, self.ground, position, radius)
 
 
-    def make_flame(self, window, time, pos_x, pos_y):
-        radius = 500-time*1.2
+    def make_flame(self, window, time, size, pos_x, pos_y):
+        radius = size * 150 - time * 1.2
         position = [pos_x, pos_y]
         self.draw_circle_alpha(window, self.value, radius, position)
         self.draw_circle_alpha(window, self.value, radius / 1.5, position)
@@ -41,6 +41,6 @@ class Background:
 
         for i in object_list:
             if i[2] == 'fire':
-                self.make_flame_background(i[5], i[0], i[1])
-                self.make_flame(self.window, i[5], i[0], i[1])
+                self.make_flame_background(i[5], i[6], i[0], i[1])
+                self.make_flame(self.window, i[5], i[6], i[0], i[1])
 

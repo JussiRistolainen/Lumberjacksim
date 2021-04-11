@@ -43,7 +43,7 @@ def main():
     #start creation
     items.create_new_item(3, object_list, 'Log')
     items.create_new_item(1, object_list, 'Matches')
-    flame.create_flame(object_list, 640, 360, 0)
+    flame.create_flame(object_list, 640, 360, 0, 3)
 
     mouse = 0
 
