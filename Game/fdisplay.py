@@ -9,7 +9,7 @@ class Display:
         self.time = 0
         self.IMAGES = {}
         self.object_list = object_list
-        self.object_size = [100, 100, 100, 100, 100, 200, 200]
+        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60]
 
     def get_object_list(self, list):
         self.object_list = list
@@ -19,9 +19,9 @@ class Display:
 
 
     def load_images(self):
-        image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn', 'spritelog', 'Lumberjack', 'charecter']
+        image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn', 'spritelog', 'Lumberjack', 'charecter', 'log_index']
         image_size =  self.object_size
-        index_list = [13, 4, 4, 3, 1, 2, 3]
+        index_list = [13, 4, 4, 3, 1, 2, 3, 1]
         for index, p in enumerate(image_list):
             for i in range(0, index_list[index]):
                 self.IMAGES[p + str(i)] = pygame.transform.scale(
@@ -53,6 +53,8 @@ class Display:
         if draw_character == 0:
             self.draw_sprite(self.object_size[2], 2, 1.7, 'Lumberjack', self.character_pos[0], self.character_pos[1], 2)
             draw_character = 1
+
+        self.draw_sprite(self.object_size[7], 2, 2, 'log_index', 150, 25)
 
     def draw_sprite(self, object_size, x_div, y_div, spritename, pos_x, pos_y, mod = 1, speed = 1):
         self.window.blit(self.IMAGES[spritename + str(int(speed*self.time[1] % mod))], (

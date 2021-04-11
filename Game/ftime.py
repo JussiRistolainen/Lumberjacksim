@@ -66,7 +66,7 @@ class Timecount:
         self.window.blit(HourFont, self.HourFontR)
         DayFont = self.Font.render("Day:{0:01}".format(self.Day), 1, self.Black)
         self.window.blit(DayFont, self.DayFontR)
-        logFont = self.Font.render("Log:{0:01}".format(self.logs), 1, self.Black)
+        logFont = self.Font.render("{0:01}".format(self.logs), 1, self.Black)
         self.window.blit(logFont, self.logFontR)
 
 

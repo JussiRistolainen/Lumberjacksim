@@ -23,7 +23,7 @@ class Flame:
         for i in flames:
             for index, p in enumerate(object_list):
                 distance = 5+math.sqrt(math.pow(p[0]-i[0], 2) + math.pow(p[1]-i[1], 2))
-                if distance < 500-i[5]*1.2:
+                if distance < 500-i[5] * 1.2:
                     p[3] = 1
 
 
