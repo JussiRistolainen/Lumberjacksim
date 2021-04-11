@@ -40,8 +40,9 @@ def main():
     #Load sprites
     display_refresh.load_images()
 
-    #spawn logs
-    items.create_new_wood_log(3, object_list)
+    #start creation
+    items.create_new_item(3, object_list, 'Log')
+    items.create_new_item(1, object_list, 'Matches')
     flame.create_flame(object_list, 640, 360, 0)
 
     mouse = 0

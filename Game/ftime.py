@@ -10,9 +10,11 @@ class Timecount:
         self.Hour = Hour
         self.Day = Day
         self.Mil = 0
-        self.logs = 0
         self.Black = (150, 150, 150)
         self.Darkness = (115, 118, 83)
+
+        self.logs = 0
+        self.matches = 3
 
 
 
@@ -55,6 +57,11 @@ class Timecount:
         self.logFontR = logFont.get_rect()
         self.logFontR.center = (200, 20)
 
+        matchboxFont = self.Font.render("MatchBox:{0}".format(self.logs), 1,
+                                      self.Black)
+        self.matchboxR = matchboxFont.get_rect()
+        self.matchboxR.center = (300, 20)
+
 
 
     def update_overlay(self):
@@ -68,6 +75,8 @@ class Timecount:
         self.window.blit(DayFont, self.DayFontR)
         logFont = self.Font.render("{0:01}".format(self.logs), 1, self.Black)
         self.window.blit(logFont, self.logFontR)
+        matchboxFont = self.Font.render("{0:01}".format(self.matches), 1, self.Black)
+        self.window.blit(matchboxFont, self.matchboxR)
 
 
     def get_time(self):
@@ -78,4 +87,6 @@ class Timecount:
         for i in picked_up_items:
             if i[2] == 'Log':
                 self.logs += 1
+            if i[2] == 'Matches':
+                self.matches += 5
 

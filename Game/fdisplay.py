@@ -9,7 +9,7 @@ class Display:
         self.time = 0
         self.IMAGES = {}
         self.object_list = object_list
-        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60]
+        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60, 60, 50]
         self.character_in_radius = 0
 
     def get_object_list(self, list):
@@ -24,9 +24,11 @@ class Display:
 
 
     def load_images(self):
-        image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn', 'spritelog', 'Lumberjack', 'charecter', 'log_index']
+        image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn',
+                      'spritelog', 'Lumberjack', 'charecter', 'log_index',
+                      'matchbox_icon', 'matchbox']
         image_size =  self.object_size
-        index_list = [13, 4, 4, 3, 1, 2, 3, 1]
+        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1]
         for index, p in enumerate(image_list):
             for i in range(0, index_list[index]):
                 self.IMAGES[p + str(i)] = pygame.transform.scale(
@@ -46,6 +48,9 @@ class Display:
                 if i[2] == 'Log':
                     self.draw_sprite(self.object_size[4], 2, 2, 'spritelog', i[0], i[1])
                     #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(i[0]-35, i[1]-15, 67, 25), 2)
+                if i[2] == 'Matches':
+                    self.draw_sprite(self.object_size[4], 2, 2, 'matchbox', i[0], i[1])
+                    #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(i[0]-35, i[1]-33, 28, 20), 2)
                 if i[2] == 'fire':
                     if i[5] * 5 < 13:
                         self.draw_sprite(self.object_size[0], 2, 2, 'sprite_', i[0], i[1], 13, 5)
@@ -64,6 +69,7 @@ class Display:
             draw_character = 1
 
         self.draw_sprite(self.object_size[7], 2, 2, 'log_index', 150, 25)
+        self.draw_sprite(self.object_size[8], 2, 2, 'matchbox_icon', 210, 20)
 
     def draw_sprite(self, object_size, x_div, y_div, spritename, pos_x, pos_y, mod = 1, speed = 1):
         self.window.blit(self.IMAGES[spritename + str(int(speed*self.time[1] % mod))], (

@@ -36,7 +36,6 @@ class Flame:
             distance = math.sqrt(math.pow(p[0] - pos[0], 2) + math.pow(p[1] - pos[1], 2))
             if distance < 500 - i[5] * 1.2:
                 is_in_radius = 1
-        print(is_in_radius)
         return is_in_radius
 
 
