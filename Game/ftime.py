@@ -126,6 +126,7 @@ class Timecount:
                         self.matches -= 1
         if icon == 4 and self.logs >= 1:
             object_list.append([position[0], position[1], 'Log', 0, [position[0] - 35, position[1] - 15, position[0] + 32, position[1] + 10]])
+            self.logs -= 1
         for i in del_list:
             object_list.pop(i)
         return del_item

@@ -46,7 +46,7 @@ class Flame:
                 flames.append(i)
         for p in flames:
             distance = math.sqrt(math.pow(p[0] - pos[0], 2) + math.pow(p[1] - pos[1], 2))
-            if distance < i[6]*150 - i[5] * 1.2:
+            if distance < p[6]*150 - p[5] * 1.2:
                 is_in_radius = 1
         return is_in_radius
 
