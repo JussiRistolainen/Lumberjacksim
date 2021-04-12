@@ -1,6 +1,7 @@
 import pygame
 
 
+
 class Timecount:
 
     def __init__(self,window,  Second, Minute, Hour, Day):
@@ -15,6 +16,7 @@ class Timecount:
 
         self.logs = 0
         self.matches = 3
+
 
 
 
@@ -83,12 +85,14 @@ class Timecount:
         return [self.Mil, self.Second, self.Minute]
 
 
-    def update_items(self, picked_up_items):
+    def update_items(self, object_list, pos, icon):
+        picked_up_items = self.lift_item(object_list, pos, icon)
         for i in picked_up_items:
             if i[2] == 'Log':
                 self.logs += 1
             if i[2] == 'Matches':
                 self.matches += 5
+
 
     def craft_flame(self):
         self.logs -= 3
@@ -98,9 +102,31 @@ class Timecount:
         self.logs -= 1
         self.matches -= 1
 
+    def light_match(self):
+        self.matches -= 1
+
     def get_wood(self):
         return self.logs
 
     def get_matches(self):
         return self.matches
+
+    def lift_item(self, object_list, position, icon):
+        del_list = []
+        del_item = []
+        for index, i in enumerate(object_list):
+            if i[4][0] < position[0] < i[4][2] and i[4][1] < position[1] < i[4][3] and i[3] == 1:
+                if icon != 3:
+                    del_list.append(index)
+                    del_item.append(i)
+                elif icon == 3 and self.matches >= 1:
+                    if i[2] == "Log":
+                        del_list.append(index)
+                        object_list.append([i[0], i[1], 'fire', 0, [0, 0, 0, 0], 0, 1])
+                        self.matches -= 1
+        if icon == 4 and self.logs >= 1:
+            object_list.append([position[0], position[1], 'Log', 0, [position[0] - 35, position[1] - 15, position[0] + 32, position[1] + 10]])
+        for i in del_list:
+            object_list.pop(i)
+        return del_item
 

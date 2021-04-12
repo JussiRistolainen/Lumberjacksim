@@ -9,12 +9,15 @@ class Display:
         self.time = 0
         self.IMAGES = {}
         self.object_list = object_list
-        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60, 60, 50, 50, 50, 150, 40, 40]
+        self.object_size = [100, 100, 100, 100, 100, 200, 200, 60,
+                            60, 50, 50, 50, 150, 40, 40, 40, 40, 40, 40]
         self.character_in_radius = 0
         self.icon = icon
 
-    def update_variables(self, list, clock, in_rad):
-        self.object_list = list
+    def update_objects(self, object):
+        self.object_list = object
+
+    def update_variables(self, clock, in_rad):
         self.time = clock
         self.character_in_radius = in_rad
 
@@ -23,6 +26,10 @@ class Display:
             self.icon = 1
         elif 2 < pos[0] < 37 and 320 < pos[1] < 355:
             self.icon = 2
+        elif 2 < pos[0] < 37 and 360 < pos[1] < 385:
+            self.icon = 3
+        elif 2 < pos[0] < 37 and 390 < pos[1] < 415:
+            self.icon = 4
         else:
             self.icon = 0
 
@@ -42,9 +49,11 @@ class Display:
     def load_images(self):
         image_list = ['sprite_', 'sprite2_', 'sprite22_', 'logburn',
                       'spritelog', 'Lumberjack', 'charecter', 'log_index',
-                      'matchbox_icon', 'matchbox', 'bondfire_icon', 'bondfire_icon_checked','Lumberjack_fire', 'torch', 'torch_checked']
+                      'matchbox_icon', 'matchbox', 'bondfire_icon', 'bondfire_icon_checked',
+                      'Lumberjack_fire', 'torch', 'torch_checked', 'match_icon', 'match_icon_checked',
+                      'log_icon', 'log_icon_checked']
         image_size =  self.object_size
-        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1, 3, 1, 1]
+        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1, 3, 1, 1,1,1,1,1, 1, 1]
         for index, p in enumerate(image_list):
             for i in range(0, index_list[index]):
                 self.IMAGES[p + str(i)] = pygame.transform.scale(
@@ -65,7 +74,7 @@ class Display:
                     draw_character = 1
                     self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0]-46, self.character_pos[1]-75, 2)
                     #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0]-27, self.character_pos[1]-95,55, 100), 2)
-                    pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0], self.character_pos[1], 2, 2), 2)
+                    #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.character_pos[0], self.character_pos[1], 2, 2), 2)
                 if i[1] > self.character_pos[1] and draw_character == 0 and torch == 1:
                     draw_character = 1
                     self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack_fire', self.character_pos[0] - 24, self.character_pos[1] - 50, 3)
@@ -105,8 +114,15 @@ class Display:
             self.draw_sprite(self.object_size[13], 2, 2, 'torch', 20, 337)
         elif self.icon == 2:
             self.draw_sprite(self.object_size[14], 2, 2, 'torch_checked', 20, 337)
-        # pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 275, 35, 35), 2)
-        # pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 320, 35, 35), 2)
+        if self.icon != 3:
+            self.draw_sprite(self.object_size[13], 2, 2, 'match_icon', 17, 370)
+        elif self.icon == 3:
+            self.draw_sprite(self.object_size[15], 2, 2, 'match_icon_checked', 17, 370)
+        if self.icon != 4:
+            self.draw_sprite(self.object_size[13], 2, 2, 'log_icon', 20, 400)
+        elif self.icon == 4:
+            self.draw_sprite(self.object_size[15], 2, 2, 'log_icon_checked', 20, 400)
+        pygame.draw.rect(self.window, (55, 55, 55), pygame.Rect(2, 390, 35, 25), 2)
 
 
     def draw_sprite(self, object_size, x_div, y_div, spritename, pos_x, pos_y, mod = 1, speed = 1):

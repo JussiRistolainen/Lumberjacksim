@@ -20,6 +20,10 @@ class Flame:
     def craft_torch(self, object_list):
         object_list.append([0, 0, 'torch', 0, [0, 0, 0, 0], 0, 1])
 
+    def light_match(self, object_list):
+        object_list.append([0, 0, 'torch', 0, [0, 0, 0, 0], 50, 1])
+
+
     def items_in_radius(self, object_list):
         flames = []
         for i in object_list:

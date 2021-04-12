@@ -40,7 +40,7 @@ def main():
     display_refresh.load_images()
 
     #start creation
-    items.create_new_item(30, object_list, 'Log')
+    items.create_new_item(8, object_list, 'Log')
     items.create_new_item(1, object_list, 'Matches')
     flame.create_flame(object_list, 540, 360, 0, 3)
 
@@ -71,7 +71,7 @@ def main():
             pos = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
             if click[0] == 1 and mouse:
-                time_count.update_items(items.lift_item(object_list, pos))
+                time_count.update_items(object_list, pos, display_refresh.get_icon())
                 if display_refresh.get_icon() == 1 and time_count.get_wood() >= 3 and time_count.get_matches() >= 1:
                     flame.craft_flame(pos, object_list)
                     time_count.craft_flame()
@@ -79,6 +79,9 @@ def main():
                 if display_refresh.get_icon() == 2 and time_count.get_wood() >= 1 and time_count.get_matches() >= 1:
                     flame.craft_torch(object_list)
                     time_count.craft_torch()
+                if display_refresh.get_icon() == 3 and time_count.get_matches() >= 1:
+                    flame.light_match(object_list)
+                    time_count.light_match()
 
                 display_refresh.icon_checked(pos)
                 mouse = 0
@@ -88,7 +91,8 @@ def main():
                 time_count.update_time()
                 flame.update_time(object_list)
                 flame.items_in_radius(object_list)
-                display_refresh.update_variables(object_list, time_count.get_time(), flame.character_in_radius(character.get_character_position(), object_list))
+                display_refresh.update_objects(object_list)
+                display_refresh.update_variables(time_count.get_time(), flame.character_in_radius(character.get_character_position(), object_list))
                 background.update(object_list)
                 display_refresh.update()
                 time_count.update_overlay()
