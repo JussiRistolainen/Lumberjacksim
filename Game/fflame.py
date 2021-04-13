@@ -11,11 +11,11 @@ class Flame:
 
 
     def create_flame(self, object_list, pos_x, pos_y, time, size):
-        object_list.append([pos_x, pos_y, 'fire', 0, [0, 0, 0, 0], time, size])
+        object_list.append([pos_x, pos_y, 'fire', 0, [pos_x-30, pos_y-25, pos_x+30, pos_y+5], time, size])
 
 
     def craft_flame(self, pos, object_list):
-        object_list.append([pos[0], pos[1], 'fire', 0, [0, 0, 0, 0], 0, 3])
+        object_list.append([pos[0], pos[1], 'fire', 0, [pos[0]-30, pos[1]-30, pos[0]+35, pos[1]+10], 0, 3])
 
     def craft_torch(self, object_list):
         object_list.append([0, 0, 'torch', 0, [0, 0, 0, 0], 0, 1])

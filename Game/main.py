@@ -85,7 +85,6 @@ def main():
 
                 display_refresh.icon_checked(pos)
                 mouse = 0
-
             if event.type == CLOCKTICKFLAME:
                 display_refresh.update_torch(object_list)
                 time_count.update_time()
@@ -97,7 +96,6 @@ def main():
                 display_refresh.update()
                 time_count.update_overlay()
                 pygame.display.flip()
-
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse = 1
 

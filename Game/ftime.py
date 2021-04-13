@@ -114,20 +114,27 @@ class Timecount:
     def lift_item(self, object_list, position, icon):
         del_list = []
         del_item = []
+        is_on_flame = False
         for index, i in enumerate(object_list):
             if i[4][0] < position[0] < i[4][2] and i[4][1] < position[1] < i[4][3] and i[3] == 1:
-                if icon != 3:
+                if icon != 3 and icon !=4 and i[2] != 'fire':
                     del_list.append(index)
                     del_item.append(i)
                 elif icon == 3 and self.matches >= 1:
                     if i[2] == "Log":
                         del_list.append(index)
-                        object_list.append([i[0], i[1], 'fire', 0, [0, 0, 0, 0], 0, 1])
-                        self.matches -= 1
-        if icon == 4 and self.logs >= 1:
+                        object_list.append([i[0], i[1], 'fire', 0, [position[0]-30, position[1]-25, position[0]+30, position[1]+5], 0, 1])
+                elif icon == 4 and self.logs >= 1:
+                    if i[2] == "fire":
+                        print(i)
+                        i[6] += 1
+                        is_on_flame = True
+                        print(i)
+        if icon == 4 and self.logs >= 1 and is_on_flame == False:
             object_list.append([position[0], position[1], 'Log', 0, [position[0] - 35, position[1] - 15, position[0] + 32, position[1] + 10]])
             self.logs -= 1
         for i in del_list:
             object_list.pop(i)
         return del_item
+
 
