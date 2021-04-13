@@ -14,7 +14,7 @@ class Timecount:
         self.Black = (150, 150, 150)
         self.Darkness = (115, 118, 83)
 
-        self.logs = 0
+        self.logs = 3
         self.matches = 3
 
 
@@ -126,10 +126,12 @@ class Timecount:
                         object_list.append([i[0], i[1], 'fire', 0, [position[0]-30, position[1]-25, position[0]+30, position[1]+5], 0, 1])
                 elif icon == 4 and self.logs >= 1:
                     if i[2] == "fire":
-                        print(i)
                         i[6] += 1
                         is_on_flame = True
-                        print(i)
+                    if i[2] == 'fireplace':
+                        i[6] += 1
+                        self.logs -= 1
+                        is_on_flame = True
         if icon == 4 and self.logs >= 1 and is_on_flame == False:
             object_list.append([position[0], position[1], 'Log', 0, [position[0] - 35, position[1] - 15, position[0] + 32, position[1] + 10]])
             self.logs -= 1

@@ -42,7 +42,7 @@ def main():
     #start creation
     items.create_new_item(8, object_list, 'Log')
     items.create_new_item(1, object_list, 'Matches')
-    flame.create_flame(object_list, 540, 360, 0, 3)
+    flame.create_fireplace(object_list, 630, 400, 0, 3)
 
     mouse = 0
 

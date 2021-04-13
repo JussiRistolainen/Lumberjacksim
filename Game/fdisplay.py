@@ -10,7 +10,7 @@ class Display:
         self.IMAGES = {}
         self.object_list = object_list
         self.object_size = [100, 100, 100, 100, 100, 200, 200, 60,
-                            60, 50, 50, 50, 150, 40, 40, 40, 40, 40, 40]
+                            60, 50, 50, 50, 150, 40, 40, 40, 40, 40, 40, 100]
         self.character_in_radius = 0
         self.icon = icon
 
@@ -51,9 +51,9 @@ class Display:
                       'spritelog', 'Lumberjack', 'charecter', 'log_index',
                       'matchbox_icon', 'matchbox', 'bondfire_icon', 'bondfire_icon_checked',
                       'Lumberjack_fire', 'torch', 'torch_checked', 'match_icon', 'match_icon_checked',
-                      'log_icon', 'log_icon_checked']
+                      'log_icon', 'log_icon_checked', 'fireplace']
         image_size =  self.object_size
-        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1, 3, 1, 1,1,1,1,1, 1, 1]
+        index_list = [13, 4, 4, 3, 1, 2, 3, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 6]
         for index, p in enumerate(image_list):
             for i in range(0, index_list[index]):
                 self.IMAGES[p + str(i)] = pygame.transform.scale(
@@ -80,6 +80,16 @@ class Display:
                     self.draw_sprite(self.object_size[4], 2, 2, 'spritelog', i[0], i[1])
                 if i[2] == 'Matches':
                     self.draw_sprite(self.object_size[4], 2, 2, 'matchbox', i[0], i[1])
+                if i[2] == 'fireplace':
+                    if i[6] >= 8 and i[5] < 4:
+                        self.draw_sprite(self.object_size[16], 2, 2, 'fireplace', i[0]-30, i[1]-45, 6)
+                        pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(i[0]-25, i[1]-60, 50, 70), 2)
+                    if i[6] >= 8 and i[5] > 4:
+                        self.draw_fire_certain(self.object_size[16], 2, 2, "fireplace5", i[0]-30, i[1]-45)
+                    if i[6] < 8:
+                        self.draw_fire_certain(self.object_size[16], 2, 2, "fireplace4", i[0]-30, i[1]-45)
+                    if i[6] <= 4:
+                        self.draw_fire_certain(self.object_size[16], 2, 2, "fireplace3", i[0]-30, i[1]-45)
                 if i[2] == 'fire':
                     if i[5]*5 < 12 and i[6] == 3:
                         self.draw_fire(self.object_size[0], 2, 2, 'sprite_', i[0], i[1], i[5], 13, 5)
@@ -129,6 +139,11 @@ class Display:
 
     def draw_fire(self, object_size, x_div, y_div, spritename, pos_x, pos_y, time, mod = 1, speed = 1):
         self.window.blit(self.IMAGES[spritename + str(int(speed * time % mod))], (
+            pos_x - object_size // x_div,
+            pos_y - object_size // y_div))
+
+    def draw_fire_certain(self, object_size, x_div, y_div, spritename, pos_x, pos_y):
+        self.window.blit(self.IMAGES[spritename], (
             pos_x - object_size // x_div,
             pos_y - object_size // y_div))
 
