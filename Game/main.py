@@ -1,12 +1,10 @@
 import pygame
-import math
 from Game.fcharacter import Character
 from Game.ftime import Timecount
 from Game.fbackground import Background
-from Game.fitems import Items
 from Game.fdisplay import Display
 from fflame import Flame
-from fgrid import Grid
+
 
 def main():
     pygame.init()
@@ -23,9 +21,8 @@ def main():
 
     #Class objects
     character = Character([640, 360], 0, 0)
-    time_count = Timecount(window, 0, 0, 0, 1)
+    time_count = Timecount(window, res_w, res_h, 0, 0, 0, 1)
     background = Background(window, character.get_character_position())
-    items = Items(window, res_w, res_h)
     display_refresh = Display(window, character.get_character_position(), object_list, icon)
     flame = Flame(window, 100, 30)
 
@@ -40,8 +37,9 @@ def main():
     display_refresh.load_images()
 
     #start creation
-    items.create_new_item(8, object_list, 'Log')
-    items.create_new_item(1, object_list, 'Matches')
+    time_count.create_new_item(8, object_list, 'Log')
+    time_count.create_new_item(1, object_list, 'Matches')
+    flame.create_lantern(object_list, 400, 400, 0, 3)
     flame.create_fireplace(object_list, 630, 400, 0, 3)
 
     mouse = 0
@@ -86,6 +84,7 @@ def main():
                 display_refresh.icon_checked(pos)
                 mouse = 0
             if event.type == CLOCKTICKFLAME:
+                print(object_list)
                 display_refresh.update_torch(object_list)
                 time_count.update_time()
                 flame.update_time(object_list)
