@@ -3,7 +3,7 @@ import pygame
 
 class Flame:
 
-    def __init__(self, window, furnace_value, min_value):
+    def __init__(self, window):
         self.window = window
         self.ground = (0, 0, 0)
 

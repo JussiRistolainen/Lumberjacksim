@@ -24,7 +24,7 @@ def main():
     time_count = Timecount(window, res_w, res_h, 0, 0, 0, 1)
     background = Background(window, character.get_character_position())
     display_refresh = Display(window, character.get_character_position(), object_list, icon)
-    flame = Flame(window, 100, 30)
+    flame = Flame(window)
 
     #GameClock
     Clock = pygame.time.Clock()
