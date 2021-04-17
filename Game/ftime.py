@@ -4,6 +4,7 @@ import numpy as np
 
 class Timecount:
 
+
     def __init__(self,window, res_w, res_h,  Second, Minute, Hour, Day):
         self.window = window
         self.res_w = res_w
@@ -19,6 +20,7 @@ class Timecount:
         self.logs = 3
         self.matches = 3
         self.lantern = 0
+
 
 
 
@@ -39,28 +41,34 @@ class Timecount:
             self.Hour = 0
 
         self.Font = pygame.font.SysFont("Trebuchet MS", 25)
-        DayFont = self.Font.render("Day:{0:03}".format(self.Day), 1, self.Black)  # zero-pad day to 3 digits
+        DayFont = self.Font.render(
+            "Day:{0:03}".format(self.Day), 1, self.Black
+        )  # zero-pad day to 3 digits
         self.DayFontR = DayFont.get_rect()
         self.DayFontR.center = (100, 20)
         # Hour
-        HourFont = self.Font.render("Hour:{0:02}".format(self.Hour), 1, self.Black)  # zero-pad hours to 2 digits
+        HourFont = self.Font.render(
+            "Hour:{0:02}".format(self.Hour), 1, self.Black
+        )  # zero-pad hours to 2 digits
         self.HourFontR = HourFont.get_rect()
         self.HourFontR.center = (1120, 20)
         # Minute
-        MinuteFont = self.Font.render("Minute:{0:02}".format(self.Minute), 1,
-                                      self.Black)  # zero-pad minutes to 2 digits
+        MinuteFont = self.Font.render(
+            "Minute:{0:02}".format(self.Minute), 1, self.Black
+        )  # zero-pad minutes to 2 digits
         self.MinuteFontR = MinuteFont.get_rect()
         self.MinuteFontR.center = (1165, 20)
 
-        SecondFont = self.Font.render("Second:{0:02}".format(self.Second), 1,
-                                      self.Black)  # zero-pad Seconds to 2 digits
+        SecondFont = self.Font.render(
+            "Second:{0:02}".format(self.Second), 1, self.Black
+        )  # zero-pad Seconds to 2 digits
         self.SecondFontR = SecondFont.get_rect()
         self.SecondFontR.center = (1200, 20)
 
-        logFont = self.Font.render("Log:{0}".format(self.logs), 1,
-                                      self.Black)
+        logFont = self.Font.render("Log:{0}".format(self.logs), 1, self.Black)
         self.logFontR = logFont.get_rect()
         self.logFontR.center = (200, 20)
+
 
         matchboxFont = self.Font.render("MatchBox:{0}".format(self.logs), 1,
                                       self.Black)
@@ -90,7 +98,6 @@ class Timecount:
         lanternFont = self.Font.render("{0:01}".format(self.lantern), 1, self.Black)
         self.window.blit(lanternFont, self.lanternR)
 
-
     def get_time(self):
         return [self.Mil, self.Second, self.Minute]
 
@@ -98,8 +105,9 @@ class Timecount:
     def update_items(self, object_list, pos, icon):
         picked_up_items = self.lift_item(object_list, pos, icon)
         for i in picked_up_items:
-            if i[2] == 'Log':
+            if i[2] == "Log":
                 self.logs += 1
+                
             if i[2] == 'Matches':
                 self.matches += 5
 
