@@ -32,4 +32,5 @@ class Character:
 
 
     def get_character_position(self):
+        self.character_pos
         return self.character_pos
