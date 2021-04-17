@@ -6,3 +6,6 @@ class Item(Position):
         super(Item, self).__init__(x, y)
         self.window = window
         self.name = name
+
+    def getName(self):
+        return self.name
