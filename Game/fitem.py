@@ -7,11 +7,5 @@ class Item(Position):
         self.window = window
         self.name = name
 
-    def getPosition(self):
-        return self.x, self.y
-
-    def getPositionX(self):
-        return self.x
-
-    def getPositionY(self):
-        return self.y
+    def getName(self):
+        return self.name
