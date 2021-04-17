@@ -84,7 +84,6 @@ def main():
                 display_refresh.icon_checked(pos)
                 mouse = 0
             if event.type == CLOCKTICKFLAME:
-                print(object_list)
                 display_refresh.update_torch(object_list)
                 time_count.update_time()
                 flame.update_time(object_list)

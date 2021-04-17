@@ -108,7 +108,6 @@ class Display:
                     if i[6] > 1:
                         self.draw_sprite(self.object_size[23], 2, 2, 'Lantern_burn', i[0]-2, i[1]-10, 3, 1)
 
-
         if draw_character == 0 and self.character_in_radius == 1 and torch == 0:
             self.draw_sprite(self.object_size[2], 2, 2, 'Lumberjack', self.character_pos[0]-46, self.character_pos[1]-75, 2)
             draw_character = 1
@@ -139,13 +138,14 @@ class Display:
             #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(20, 420, 30, 30))
         elif self.icon == 5:
             self.draw_sprite(self.object_size[21], 2, 2, 'Lantern_checked', 20, 435)
+
     def draw_sprite(self, object_size, x_div, y_div, sprite_name, pos_x, pos_y, mod = 1, speed = 1):
         self.window.blit(self.IMAGES[sprite_name + str(int(speed*self.time[1] % mod))], (
             pos_x - object_size//x_div,
             pos_y - object_size//y_div))
 
-    def draw_fire(self, object_size, x_div, y_div, spritename, pos_x, pos_y, time, mod = 1, speed = 1):
-        self.window.blit(self.IMAGES[spritename + str(int(speed * time % mod))], (
+    def draw_fire(self, object_size, x_div, y_div, sprite_name, pos_x, pos_y, time, mod = 1, speed = 1):
+        self.window.blit(self.IMAGES[sprite_name + str(int(speed * time % mod))], (
             pos_x - object_size // x_div,
             pos_y - object_size // y_div))
 

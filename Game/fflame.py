@@ -6,8 +6,6 @@ class Flame:
     def __init__(self, window, furnace_value, min_value):
         self.window = window
         self.ground = (0, 0, 0)
-        self.furnace_value = furnace_value
-        self.min_value = min_value
 
 
     def create_flame(self, object_list, pos_x, pos_y, time, size):
